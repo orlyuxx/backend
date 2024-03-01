@@ -29,7 +29,3 @@ Route::delete('/carousel/{id}', [CarouselItemsController::class, 'destroy']);
 Route::get('/user', [UserController::class, 'index']);
 Route::get('/user/{id}', [UserController::class, 'show']);
 Route::delete('/user/{id}', [UserController::class, 'destroy']);
-
-Route::get('/greeting', function () {
-    return 'Hello ';
-});
