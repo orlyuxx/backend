@@ -22,6 +22,7 @@ class CarouselItemsController extends Controller
      */
     public function store(CarouselItemsRequest $request)
     {
+
         $validated = $request->validated();
 
         $carouselItem = CarouselItems::create($validated);
@@ -34,7 +35,7 @@ class CarouselItemsController extends Controller
      */
     public function show(string $id)
     {
-        return $carouselItem = CarouselItems::findOrFail($id);
+        return CarouselItems::findOrFail($id);
     }
 
     /**
