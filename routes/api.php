@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CarouselItemsController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,6 @@ Route::delete('/carousel/{id}', [CarouselItemsController::class, 'destroy']);
 Route::get('/user', [UserController::class, 'index']);
 Route::get('/user/{id}', [UserController::class, 'show']);
 Route::delete('/user/{id}', [UserController::class, 'destroy']);
+
+Route::get('/student', [StudentController::class, 'index']);
+Route::post('/student', [StudentController::class, 'store']);
