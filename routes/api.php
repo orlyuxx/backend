@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CarouselItemsController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\StudentController;
+use App\Http\Controllers\Api\PlayerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,7 @@ Route::delete('/user/{id}', [UserController::class, 'destroy']);
 
 Route::get('/student', [StudentController::class, 'index']);
 Route::post('/student', [StudentController::class, 'store']);
+
+Route::get('/player', [PlayerController::class, 'index']);
+Route::get('/player/{id}', [PlayerController::class, 'show']);
+Route::post('/player', [PlayerController::class, 'store']);
