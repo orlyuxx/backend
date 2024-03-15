@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\CarouselItemsController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\StudentController;
 use App\Http\Controllers\Api\PlayerController;
+use App\Http\Controllers\Api\PromptController;
+use App\Models\Prompt;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +40,8 @@ Route::post('/student', [StudentController::class, 'store']);
 Route::get('/player', [PlayerController::class, 'index']);
 Route::get('/player/{id}', [PlayerController::class, 'show']);
 Route::post('/player', [PlayerController::class, 'store']);
+
+Route::get('/prompt', [PromptController::class, 'index']);
+Route::get('/prompt/{id}', [PromptController::class, 'show']);
+Route::delete('/prompt/{id}', [PromptController::class, 'destroy']);
+Route::post('/prompt', [PromptController::class, 'store']);
