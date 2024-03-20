@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -14,6 +16,20 @@ class UserController extends Controller
     public function index()
     {
         return User::all();
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(UserRequest $request)
+    {
+        $validated = $request->validated();
+        
+        // $validated['password'] = Hash::make($validated['password']);
+
+        $user = User::create($validated);
+
+        return $user;
     }
 
     /**

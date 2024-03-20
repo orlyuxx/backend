@@ -32,12 +32,13 @@ Route::delete('/carousel/{id}', [CarouselItemsController::class, 'destroy']);
 
 Route::get('/user', [UserController::class, 'index']);
 Route::get('/user/{id}', [UserController::class, 'show']);
+Route::post('/user', [UserController::class, 'store']);
 Route::delete('/user/{id}', [UserController::class, 'destroy']);
 
 Route::get('/student', [StudentController::class, 'index']);
 Route::post('/student', [StudentController::class, 'store']);
 
-Route::get('/player', [PlayerController::class, 'index']);
+Route::get('/player', [PlayerController::class, 'index']); 
 Route::get('/player/{id}', [PlayerController::class, 'show']);
 Route::post('/player', [PlayerController::class, 'store']);
 
