@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\StudentController;
 use App\Http\Controllers\Api\PlayerController;
 use App\Http\Controllers\Api\PromptController;
+use App\Http\Controllers\Api\AuthController;
 use App\Models\Prompt;
 
 /*
@@ -20,25 +21,33 @@ use App\Models\Prompt;
 |
 */
 
+Route::controller(AuthController::class)->group(function () {
+    Route::post('/login',       'login')->name('user.login');
+    Route::post('/logout',      'logout')->name('user.logout');
+});
+
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 // Carousel Items
-Route::get('/carousel', [CarouselItemsController::class, 'index']);
-Route::get('/carousel/{id}', [CarouselItemsController::class, 'show']);
-Route::post('/carousel', [CarouselItemsController::class, 'store']);
-Route::put('/carousel/{id}', [CarouselItemsController::class, 'update']);
-Route::delete('/carousel/{id}', [CarouselItemsController::class, 'destroy']);
+Route::controller(CarouselItemsController::class)->group(function () {
+    Route::get('/carousel',         'index');
+    Route::get('/carousel/{id}',    'show');
+    Route::post('/carousel',        'store');
+    Route::put('/carousel/{id}',    'update');
+    Route::delete('/carousel/{id}', 'destroy');
+});
 
 // User
-Route::get('/user', [UserController::class, 'index']);
-Route::get('/user/{id}', [UserController::class, 'show']);
-Route::post('/user', [UserController::class, 'store'])->name('user.store');
-Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
-Route::put('/user/email/{id}', [UserController::class, 'update_email'])->name('user.email');
-Route::put('/user/password/{id}', [UserController::class, 'update_password'])->name('user.password');
-Route::delete('/user/{id}', [UserController::class, 'destroy']);
+// Route::get('/user', [UserController::class, 'index']);
+// Route::get('/user/{id}', [UserController::class, 'show']);
+// Route::post('/user', [UserController::class, 'store'])->name('user.store');
+// Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
+// Route::put('/user/email/{id}', [UserController::class, 'update_email'])->name('user.email');
+// Route::put('/user/password/{id}', [UserController::class, 'update_password'])->name('user.password');
+// Route::delete('/user/{id}', [UserController::class, 'destroy']);
  
 // Student
 Route::get('/student', [StudentController::class, 'index']);
