@@ -21,33 +21,38 @@ use App\Models\Prompt;
 |
 */
 
-Route::controller(AuthController::class)->group(function () {
-    Route::post('/login',       'login')->name('user.login');
-    Route::post('/logout',      'logout')->name('user.logout');
+// Public APIs
+Route::post('/login',   [AuthController::class, 'login'])->name('user.login');
+Route::post('/user',    [UserController::class, 'store'])->name('user.store');
+
+// Private APIs
+Route::middleware(['auth:sanctum'])->group(function () {
+
+    Route::post('/logout', [AuthController::class, 'logout'])->name('user.logout');
+
+    // Carousel Items
+    Route::controller(CarouselItemsController::class)->group(function () {
+        Route::get('/carousel',             'index');
+        Route::get('/carousel/{id}',        'show');
+        Route::post('/carousel',            'store');
+        Route::put('/carousel/{id}',        'update');
+        Route::delete('/carousel/{id}',     'destroy');
+    });
+
+    // User
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/user',                 'index');
+        Route::get('/user/{id}',            'show');
+        Route::put('/user/{id}',            'update')->name('user.update');
+        Route::put('/user/email/{id}',      'update_email')->name('user.email');
+        Route::put('/user/password/{id}',   'update_password')->name('user.password');
+        Route::delete('/user/{id}',         'destroy');
+    });
+    
+
 });
 
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-// Carousel Items
-Route::controller(CarouselItemsController::class)->group(function () {
-    Route::get('/carousel',         'index');
-    Route::get('/carousel/{id}',    'show');
-    Route::post('/carousel',        'store');
-    Route::put('/carousel/{id}',    'update');
-    Route::delete('/carousel/{id}', 'destroy');
-});
-
-// User
-// Route::get('/user', [UserController::class, 'index']);
-// Route::get('/user/{id}', [UserController::class, 'show']);
-// Route::post('/user', [UserController::class, 'store'])->name('user.store');
-// Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
-// Route::put('/user/email/{id}', [UserController::class, 'update_email'])->name('user.email');
-// Route::put('/user/password/{id}', [UserController::class, 'update_password'])->name('user.password');
-// Route::delete('/user/{id}', [UserController::class, 'destroy']);
  
 // Student
 Route::get('/student', [StudentController::class, 'index']);
