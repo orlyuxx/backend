@@ -8,7 +8,9 @@ use App\Http\Controllers\Api\StudentController;
 use App\Http\Controllers\Api\PlayerController;
 use App\Http\Controllers\Api\PromptController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ProfileController;
 use App\Models\Prompt;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +32,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('user.logout');
 
+    // ADMIN APIs
     // Carousel Items
     Route::controller(CarouselItemsController::class)->group(function () {
         Route::get('/carousel',             'index');
@@ -38,7 +41,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::put('/carousel/{id}',        'update');
         Route::delete('/carousel/{id}',     'destroy');
     });
-
     // User
     Route::controller(UserController::class)->group(function () {
         Route::get('/user',                 'index');
@@ -46,14 +48,34 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::put('/user/{id}',            'update')->name('user.update');
         Route::put('/user/email/{id}',      'update_email')->name('user.email');
         Route::put('/user/password/{id}',   'update_password')->name('user.password');
+        Route::put('/user/image/{id}',      'image')->name('user.image');
         Route::delete('/user/{id}',         'destroy');
     });
-    
+
+    // User Specific APIs
+    Route::get('/profile/show',       [ProfileController::class, 'show']);
+    Route::put('/profile/image',      [ProfileController::class, 'image'])->name('profile.image');
 
 });
 
 
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Student
 Route::get('/student', [StudentController::class, 'index']);
 Route::post('/student', [StudentController::class, 'store']);
