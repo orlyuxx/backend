@@ -15,6 +15,9 @@ return new class extends Migration
             $table->string('role')->nullable();
             $table->string('firstname');
             $table->renameColumn('name', 'lastname');
+            $table->date('birthdate')->nullable();
+            $table->string('gender');
+            $table->string('address'); 
         });
     }
 

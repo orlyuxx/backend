@@ -30,7 +30,7 @@ Route::post('/user',    [UserController::class, 'store'])->name('user.store');
 // Private APIs
 Route::middleware(['auth:sanctum'])->group(function () {
 
-    Route::post('/logout', [AuthController::class, 'logout'])->name('user.logout');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('user.logout');
 
     // ADMIN APIs
     // Carousel Items
